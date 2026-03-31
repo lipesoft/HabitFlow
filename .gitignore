@@ -18,3 +18,6 @@ oracleJdk-26/
 *.tar
 *.rar
 *.7z
+.gradle/
+build/
+.idea/

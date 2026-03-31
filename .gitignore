@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+oracleJdk-26/
+*.zip
+*.tar
+*.rar
+*.7z

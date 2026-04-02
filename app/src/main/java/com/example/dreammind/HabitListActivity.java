@@ -20,7 +20,6 @@ public class HabitListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_habit_list);
 
         recyclerView = findViewById(R.id.recyclerHabits);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         habitList = new ArrayList<>();
@@ -37,7 +36,30 @@ public class HabitListActivity extends AppCompatActivity {
 
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddHabitActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+
+            String title = data.getStringExtra("title");
+            String description = data.getStringExtra("description");
+
+            habitList.add(new Habit(title, description, false));
+            adapter.notifyDataSetChanged();
+        }
+
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            int position = data.getIntExtra("position", -1);
+
+            if (position != -1) {
+                habitList.get(position).completed = true;
+                adapter .notifyDataSetChanged();
+            }
+        }
+    }
 }
+

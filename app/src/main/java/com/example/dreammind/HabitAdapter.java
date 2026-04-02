@@ -1,10 +1,12 @@
 package com.example.dreammind;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -44,6 +46,16 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder
         holder.title.setText(habit.getTitle());
         holder.description.setText(habit.getDescription());
         holder.status.setText(habit.isCompleted() ? "Concluído" : "Pendente");
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), HabitDetailActivity.class);
+
+            intent.putExtra("title", habit.getTitle());
+            intent.putExtra("description", habit.getDescription());
+            intent.putExtra("status", habit.isCompleted());
+            intent.putExtra("position", position);
+
+            ((AppCompatActivity) v.getContext()).startActivityForResult(intent, 2);
+        });
     }
 
     @Override

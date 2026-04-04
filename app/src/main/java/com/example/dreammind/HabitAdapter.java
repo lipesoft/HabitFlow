@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,15 @@ import java.util.List;
 public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder> {
 
     private List<Habit> habitList;
+    private OnItemClickListener listener;
 
-    public HabitAdapter(List<Habit> habitList) {
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public HabitAdapter(List<Habit> habitList, OnItemClickListener listener) {
         this.habitList = habitList;
+        this.listener = listener;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -45,16 +52,19 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder
 
         holder.title.setText(habit.getTitle());
         holder.description.setText(habit.getDescription());
-        holder.status.setText(habit.isCompleted() ? "Concluído" : "Pendente");
+
+        if (habit.isCompleted()) {
+            holder.status.setText("Concluído");
+            holder.status.setTextColor(android.graphics.Color.parseColor("#2E7D32"));
+        }else {
+            holder.status.setText("Pendente");
+            holder.status.setTextColor(android.graphics.Color.parseColor("#C62828"));
+        }
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), HabitDetailActivity.class);
-
-            intent.putExtra("title", habit.getTitle());
-            intent.putExtra("description", habit.getDescription());
-            intent.putExtra("status", habit.isCompleted());
-            intent.putExtra("position", position);
-
-            ((AppCompatActivity) v.getContext()).startActivityForResult(intent, 2);
+            if (listener != null) {
+                listener.onItemClick(holder.getAdapterPosition());
+            }
         });
     }
 

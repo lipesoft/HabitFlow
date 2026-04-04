@@ -30,5 +30,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="bottom|end"
+        android:contentDescription="Adicionar hábito"
+        app:backgroundTint="#6200EE"
+        app:tint="#FFFFFF"
         app:srcCompat="@android:drawable/ic_input_add"/>
+
+    <TextView
+        android:id="@+id/textEmpty"
+        android:text="Nenhum hábito ainda 😢\nClique no + para adicionar"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     </FrameLayout>

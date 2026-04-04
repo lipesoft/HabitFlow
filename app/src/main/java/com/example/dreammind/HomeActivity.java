@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         btnHabits = findViewById(R.id.buttonHabits);
 
         btnHabits.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HabitsListActivity.class);
+            Intent intent = new Intent(this, HabitListActivity.class);
             startActivity(intent);
 
         });

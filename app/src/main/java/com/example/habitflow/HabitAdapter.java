@@ -1,41 +1,38 @@
-package com.example.dreammind;
+package com.example.habitflow;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.habitflow.data.model.Habit;
 
 import java.util.List;
 
 public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder> {
 
-    private List<Habit> habitList;
-    private OnItemClickListener listener;
+    private final List<Habit> habitList;
+    private final OnItemClickListener listener;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
     public HabitAdapter(List<Habit> habitList, OnItemClickListener listener) {
         this.habitList = habitList;
-        this.listener = listener;
+        this.listener  = listener;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView title, description, status;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            title = itemView.findViewById(R.id.textTitle);
+            title       = itemView.findViewById(R.id.textTitle);
             description = itemView.findViewById(R.id.textDescription);
-            status = itemView.findViewById(R.id.textStatus);
+            status      = itemView.findViewById(R.id.textStatus);
         }
     }
 
@@ -50,21 +47,19 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Habit habit = habitList.get(position);
 
-        holder.title.setText(habit.getTitle());
+        holder.title.setText(habit.getName());
         holder.description.setText(habit.getDescription());
 
         if (habit.isCompleted()) {
             holder.status.setText("Concluído");
             holder.status.setTextColor(android.graphics.Color.parseColor("#2E7D32"));
-        }else {
+        } else {
             holder.status.setText("Pendente");
             holder.status.setTextColor(android.graphics.Color.parseColor("#C62828"));
         }
 
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(holder.getAdapterPosition());
-            }
+            if (listener != null) listener.onItemClick(holder.getAdapterPosition());
         });
     }
 

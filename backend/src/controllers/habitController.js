@@ -2,11 +2,11 @@ const Habit = require("../models/Habit");
 
 exports.createHabit = async (req, res) => {
   try {
-    const { title, frequency } = req.body;
+    const { name, description } = req.body;
 
     const habit = new Habit({
-      title,
-      frequency,
+      title: name,
+      frequency: description,
       user: req.user.id
     });
 

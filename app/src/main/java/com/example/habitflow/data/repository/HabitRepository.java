@@ -17,15 +17,12 @@ public class HabitRepository {
 
     public Call<Habit> createHabit(String token, String name, String description) {
         Map<String, String> body = new HashMap<>();
-        body.put("name", name);
+        body.put("name",        name);
         body.put("description", description);
         return RetrofitClient.getApiService().createHabit("Bearer " + token, body);
     }
 
-    public Call<Habit> updateHabit(String token, String id, String name, String description) {
-        Map<String, String> body = new HashMap<>();
-        body.put("name", name);
-        body.put("description", description);
+    public Call<Habit> updateHabit(String token, String id, Map<String, Object> body) {
         return RetrofitClient.getApiService().updateHabit("Bearer " + token, id, body);
     }
 

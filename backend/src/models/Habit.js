@@ -5,7 +5,7 @@ const HabitSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  frequency: {
+  description: {
     type: String,
     required: true
   },

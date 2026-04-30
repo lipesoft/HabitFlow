@@ -20,15 +20,24 @@ public interface ApiService {
     // Auth
     @POST("auth/register")
     Call<User> register(@Body Map<String, String> body);
+
     @POST("auth/login")
     Call<User> login(@Body Map<String, String> body);
+
     // Habits
     @GET("habits")
     Call<List<Habit>> getHabits(@Header("Authorization") String token);
+
     @POST("habits")
-    Call<Habit> createHabit(@Header("Authorization") String token, @Body Map<String, String> body);
+    Call<Habit> createHabit(@Header("Authorization") String token,
+                             @Body Map<String, String> body);
+
     @PUT("habits/{id}")
-    Call<Habit> updateHabit(@Header("Authorization") String token, @Path("id") String id, @Body Map<String, String> body);
+    Call<Habit> updateHabit(@Header("Authorization") String token,
+                             @Path("id") String id,
+                             @Body Map<String, Object> body);   // Object para suportar boolean
+
     @DELETE("habits/{id}")
-    Call<Habit> deleteHabit(@Header("Authorization") String token, @Path("id") String id);
+    Call<Habit> deleteHabit(@Header("Authorization") String token,
+                             @Path("id") String id);
 }

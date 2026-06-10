@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.habitflow.data.model.Habit;
@@ -50,12 +51,12 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.MyViewHolder
         holder.title.setText(habit.getName());
         holder.description.setText(habit.getDescription());
 
-        if (habit.isCompleted()) {
-            holder.status.setText("Concluído");
-            holder.status.setTextColor(android.graphics.Color.parseColor("#2E7D32"));
-        } else {
-            holder.status.setText("Pendente");
-            holder.status.setTextColor(android.graphics.Color.parseColor("#C62828"));
+        if(habit.isCompleted()){
+            holder.status.setText("🟢 Concluído");
+            holder.status.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.success));
+        }else{
+            holder.status.setText("🟡 Em andamento");
+            holder.status.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.secondary));
         }
 
         holder.itemView.setOnClickListener(v -> {

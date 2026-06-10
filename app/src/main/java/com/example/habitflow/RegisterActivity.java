@@ -45,16 +45,35 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         btnRegister.setOnClickListener(v -> {
-            String name     = editName.getText().toString().trim();
-            String email    = editEmail.getText().toString().trim();
+
+            String name = editName.getText().toString().trim();
+            String email = editEmail.getText().toString().trim();
             String password = editPassword.getText().toString().trim();
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,
+                        "Preencha todos os campos",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            authViewModel.register(name, email, password);
+            SharedPreferences prefs =
+                    getSharedPreferences("habitflow_prefs", MODE_PRIVATE);
+
+            prefs.edit()
+                    .putString("nome", name)
+                    .putString("email", email)
+                    .putString("senha", password)
+                    .apply();
+
+            Toast.makeText(this,
+                    "Conta criada com sucesso!",
+                    Toast.LENGTH_SHORT).show();
+
+            startActivity(
+                    new Intent(this, LoginActivity.class));
+
+            finish();
         });
     }
 }

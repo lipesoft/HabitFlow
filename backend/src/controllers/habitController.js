@@ -6,7 +6,7 @@ exports.createHabit = async (req, res) => {
 
     const habit = new Habit({
       title: name,
-      frequency: description,
+      description: description,
       user: req.user.id
     });
 

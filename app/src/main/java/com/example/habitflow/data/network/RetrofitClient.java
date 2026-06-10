@@ -4,9 +4,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-
-    // ⚠️ Em desenvolvimento (emulador): 10.0.2.2 aponta para o localhost da sua máquina
-    // ⚠️ Para produção: troque pela URL do Render.com
     private static final String BASE_URL = "http://10.0.2.2:6000/";
 
     private static Retrofit retrofit = null;
